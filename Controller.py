@@ -7,3 +7,25 @@ def connect():
     con = sqlite3.connect("data.db")
     con.row_factory = sqlite3.Row
     return con
+
+def addType():
+    #Name
+    #type
+    #Id
+
+def addAnimal():
+    #Common Name
+    #Scientific Name
+    #Data
+    #fk_id Type
+
+def editAnimal():
+
+    #Edit the above
+    
+def addAnimalPhoto():
+    #id_imagen
+    #Location
+    #Format
+    #Resolution
+    #fk_id Animal
