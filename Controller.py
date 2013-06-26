@@ -29,3 +29,7 @@ def addAnimalPhoto():
     #Format
     #Resolution
     #fk_id Animal
+    
+def getData():
+    #Gets Data from the database for display
+    
