@@ -9,11 +9,13 @@ def connect():
     return con
 
 def addType():
+    x=1
     #Name
     #type
     #Id
 
 def addAnimal():
+    x=1
     #Common Name
     #Scientific Name
     #Data
@@ -22,6 +24,7 @@ def addAnimal():
 def editAnimal():
 
     #Edit the above
+    x=1
     
 def addAnimalPhoto():
     #id_imagen
@@ -29,7 +32,9 @@ def addAnimalPhoto():
     #Format
     #Resolution
     #fk_id Animal
+    x=1
     
 def getData():
     #Gets Data from the database for display
+    x=1
     
