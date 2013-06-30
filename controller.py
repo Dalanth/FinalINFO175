@@ -8,31 +8,22 @@ def connect():
     con.row_factory = sqlite3.Row
     return con
 
-def addType():
-    x = 1
-    #Name
-    #type
-    #Id
-
-def addAnimal():
-    x = 1
-    #Common Name
-    #Scientific Name
-    #Data
-    #fk_id Type
-
-def editAnimal():
-    #Edit the above
-    x = 1
     
-def addAnimalPhoto():
-    #id_imagen
-    #Location
-    #Format
-    #Resolution
-    #fk_id Animal
-    x = 1
-    
-def getData():
+def get_animal():
     #Gets Data from the database for display
-    x = 1
+    con = connect()
+    c = con.cursor()
+    query = "SELECT * FROM animal WHERE nombre_comun = ?"
+    result = c.execute(query, [nombre_comun])
+    animal = result.fetchone()
+    con.close()
+    return animal
+
+def get_animals():
+    con = connect()
+    c = con.cursor()
+    query = """SELECT id_animal, nombre_comun FROM animal"""
+    result = c.execute(query)
+    animals = result.fetchall()
+    con.close()
+    return animals

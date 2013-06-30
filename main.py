@@ -7,7 +7,6 @@ import sys
 import view_form
 from PySide import QtGui, QtCore
 from mainwindow import Ui_MainWindow
-from table import Ui_Table
 
 class MainWindow(QtGui.QMainWindow):
     
@@ -16,13 +15,28 @@ class MainWindow(QtGui.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.set_listeners()
-        #self.show()
-        #durr
+        self.load_animals()
 
 
     def delete(self):
     #Calls on controller to delete a product row on the database
         print "estoy eliminando"
+
+
+    def load_animals(self, animals=None):
+        if animals is None:
+            animals = controller.get_animals()
+        self.model = QtGui.QStandardItemModel(len(animals), 1)        
+        self.model.setHorizontalHeaderItem(0, QtGui.QStandardItem(u"Animal"))
+        self.model.setHorizontalHeaderItem(1, QtGui.QStandardItem(u"Imágenes"))
+        r = 0
+        for row in animals:
+            index = self.model.index(r, 0, QtCore.QModelIndex())
+            self.model.setData(index, row['nombre_comun'])
+            r = r+1
+        self.ui.tableView.setModel(self.model)
+        self.ui.tableView.setColumnWidth(0, 150)
+        self.ui.tableView.setColumnWidth(1, 330)
 
 
     def set_listeners(self):
@@ -43,7 +57,7 @@ class MainWindow(QtGui.QMainWindow):
     #Displays the edit products screen
         form = view_form.Form(self)
         form.exec_()
-
+        self.ui.success.setText("Agregado")
 
 
 def run():
