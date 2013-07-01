@@ -64,12 +64,11 @@ class MainWindow(QtGui.QMainWindow):
         model=self.ui.tableView.model()
         index=self.ui.tableView.currentIndex()
         data=model.index(index.row(), 0, QtCore.QModelIndex()).data()
-        print(data)
         animal=controller.get_animal(data)
         self.ui.common.setText(animal[1])
         self.ui.cientific.setText(animal[2])
         self.ui.type.setText(animal[3])
-        self.ui.data.setText(animal[4])
+        self.ui.data.setText(animal[5])
         
 
 
