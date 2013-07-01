@@ -9,7 +9,7 @@ def connect():
     return con
 
     
-def get_animal():
+def get_animal(nombre_comun):
     #Gets Data from the database for display
     con = connect()
     c = con.cursor()
@@ -27,3 +27,16 @@ def get_animals():
     animals = result.fetchall()
     con.close()
     return animals
+
+def get_type(nombre):
+    con=connect()
+    c=con.cursor()
+    query="SELECT fk_id_tipo FROM animal WHERE nombre_comun=?"
+    result=c.execute(query,[nombre])
+    tipo=result.fetchone()
+    print(tipo[0])
+    query="SELECT nombre FROM tipo WHERE id_tipo=?"
+    result=c.execute(query,[tipo[0]])
+    tipo=result.fetchone()
+    print(tipo[0])
+    return tipo
