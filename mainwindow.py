@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Sun Jun 30 02:23:43 2013
+# Created: Sun Jun 30 23:53:45 2013
 #      by: pyside-uic 0.2.13 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -100,14 +100,15 @@ class Ui_MainWindow(object):
         self.data = QtGui.QLabel(self.showInfo)
         self.data.setGeometry(QtCore.QRect(20, 90, 321, 101))
         self.data.setText("")
+        self.data.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.data.setObjectName("data")
         self.graphicsView = QtGui.QGraphicsView(self.showInfo)
         self.graphicsView.setGeometry(QtCore.QRect(10, 200, 331, 251))
         self.graphicsView.setObjectName("graphicsView")
         self.horizontalLayout_3.addWidget(self.showInfo)
         self.success = QtGui.QLabel(self.centralwidget)
-        self.success.setGeometry(QtCore.QRect(740, 530, 130, 15))
-        self.success.setMaximumSize(QtCore.QSize(130, 15))
+        self.success.setGeometry(QtCore.QRect(520, 530, 350, 25))
+        self.success.setMaximumSize(QtCore.QSize(350, 25))
         self.success.setText("")
         self.success.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.success.setObjectName("success")
