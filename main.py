@@ -51,6 +51,7 @@ class MainWindow(QtGui.QMainWindow):
     def show_add_form(self):
     #Displays the add products screen
         form = view_form.Form(self)
+        form.rejected.connect(self.load_animals)
         form.exec_()
 
 

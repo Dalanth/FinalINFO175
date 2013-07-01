@@ -4,7 +4,6 @@ from PySide import QtGui, QtCore
 import controller
 from form import Ui_Form
 
-
 class Form(QtGui.QDialog):
 
 	def __init__(self, parent=None, common_name=None):
@@ -23,7 +22,17 @@ class Form(QtGui.QDialog):
 
 	def add(self):
 		#Add a new animal
-		print "agrego animal"
+		print "agregar animal"
+		Name = self.ui.common_name.text()
+        CiName = self.ui.cientific_name.text()
+        datos=self.ui.data.text()
+        tipo=None
+        result = controller.add_animal(Name, CientificName, datos, tipo)
+        if result:
+            self.reject()
+            print "se agrego el agrego animal exitosamente"
+        else:
+            self.ui.message.setText("Hubo un problema al intentar agregar el animal")
 
 	def edit(self):
 		#Edit an existent animal in the database

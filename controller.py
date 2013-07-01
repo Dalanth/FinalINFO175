@@ -2,12 +2,28 @@
 
 import sqlite3
 
+def add_animal(nombre,nombrec,datos,tipo):
+    #Add a new product to the table 'product' on the database
+    success = False
+    con = connect()
+    c = con.cursor()
+    values = [nombre,nombrec,datos,tipo]
+    query = "INSERT INTO product (nombre_comun, nombre_cientifico, datos, fk_id_tipo) VALUES(?,?,?,?)"
+    try:
+        result = c.execute(query, values)
+        success = True
+        con.commit()
+    except sqlite3.Error as e:
+        success = False
+        print "Error: ", e.args[0]
+    con.close()
+    return success
+
 def connect():
     #Connect with the database
     con = sqlite3.connect("data.db")
     con.row_factory = sqlite3.Row
     return con
-
     
 def get_animal(nombre_comun):
     #Gets Data from the database for display
