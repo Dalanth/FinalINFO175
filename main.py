@@ -45,6 +45,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.add.triggered.connect(self.show_add_form)
         self.ui.edit.triggered.connect(self.show_edit_form)
         self.ui.quit.triggered.connect(self.close)
+        self.ui.tableView.clicked.connect(self.display_data)
 
 
     def show_add_form(self):
@@ -58,6 +59,18 @@ class MainWindow(QtGui.QMainWindow):
         form = view_form.Form(self)
         form.exec_()
         self.ui.success.setText("Agregado")
+
+    def display_data(self):
+        model=self.ui.tableView.model()
+        index=self.ui.tableView.currentIndex()
+        data=model.index(index.row(), 0, QtCore.QModelIndex()).data()
+        print(data)
+        animal=controller.get_animal(data)
+        self.ui.common.setText(animal[1])
+        self.ui.cientific.setText(animal[2])
+        self.ui.type.setText(animal[3])
+        self.ui.data.setText(animal[4])
+        
 
 
 def run():

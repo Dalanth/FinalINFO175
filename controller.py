@@ -9,7 +9,7 @@ def connect():
     return con
 
     
-def get_animal():
+def get_animal(nombre_comun):
     #Gets Data from the database for display
     con = connect()
     c = con.cursor()
