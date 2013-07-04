@@ -20,10 +20,10 @@ class MainWindow(QtGui.QMainWindow):
 
 
     def delete(self):
-    #Calls on controller to delete a product row on the database
+    #Elimina un animal de la base de datos mediante el controlador
         model = self.ui.tableView.model()
         index = self.ui.tableView.currentIndex()
-        if index.row() == -1: #No row selected
+        if index.row() == -1: #No hay fila seleccionada
             self.ui.errorMessageDialog = QtGui.QMessageBox.information(self, 'Error',
                                             u"Debe seleccionar el animal que desea eliminar",
                                             QtGui.QMessageBox.Ok, QtGui.QMessageBox.Ok)
@@ -33,7 +33,7 @@ class MainWindow(QtGui.QMainWindow):
                                     u"Está seguro que desea eliminar el animal seleccionado?",
                                     QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
 
-            if self.ui.confirmMessage == QtGui.QMessageBox.Yes:#Prompts the user for confirmation
+            if self.ui.confirmMessage == QtGui.QMessageBox.Yes:#Pide confirmacion
                 animal = model.index(index.row(), 0, QtCore.QModelIndex()).data()
                 if (controller.delete(animal)):
                     self.load_animals()
@@ -104,13 +104,13 @@ class MainWindow(QtGui.QMainWindow):
 
 
     def show_add_form(self):
-    #Displays the add products screen
+    #Muestra la ventana de agregar animales
         form = view_form.Form(self)
         form.exec_()
 
 
     def show_edit_form(self):
-    #Displays the edit products screen
+    #Muestra la ventana de editar productos
         form = view_form.Form(self)
         form.exec_()
         self.ui.success.setText("Agregado")
