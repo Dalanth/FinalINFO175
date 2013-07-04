@@ -8,7 +8,7 @@ def add_animal(nombre,nombrec,datos,tipo):
     con = connect()
     c = con.cursor()
     values = [nombre,nombrec,datos,tipo]
-    query = "INSERT INTO product (nombre_comun, nombre_cientifico, datos, fk_id_tipo) VALUES(?,?,?,?)"
+    query = "INSERT INTO animal (nombre_comun, nombre_cientifico, datos, fk_id_tipo) VALUES(?,?,?,?)"
     try:
         result = c.execute(query, values)
         success = True

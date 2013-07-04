@@ -18,6 +18,7 @@ class Form(QtGui.QDialog):
 			self.ui.btn_add.clicked.connect(self.edit)
 		self.ui.btn_open.clicked.connect(self.abrir)
 		self.ui.btn_cancel.clicked.connect(self.cancel)
+		self.load_types()
 
 
 	def add(self):
@@ -50,7 +51,6 @@ class Form(QtGui.QDialog):
         def load_types(self):
                 #Carga los tipos de animales en el combobox
                 types = controller.get_types()
-                self.ui.typeBox.addItem("Todos", -1)
                 for type1 in types: #Agrega los tipos al combobox
                     self.ui.typeBox.addItem(type1["nombre"], type1["id_tipo"])
                 self.ui.typeBox.setEditable(False)
