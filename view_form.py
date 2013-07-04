@@ -2,6 +2,7 @@
 # ­*­ coding: utf­8 ­*­
 from PySide import QtGui, QtCore 
 import controller
+import controller_form
 from form import Ui_Form
 
 class Form(QtGui.QDialog):
@@ -27,7 +28,7 @@ class Form(QtGui.QDialog):
 		Name = self.ui.common_name.toPlainText()
                 CiName = self.ui.cientific_name.toPlainText()
                 datos=self.ui.data.toPlainText()
-                tipo=None
+                tipo=controller_form.get_id_type(self.ui.typeBox.currentText())
                 result = controller.add_animal(Name, CiName, datos, tipo)
                 if result:
                         self.reject()
