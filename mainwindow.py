@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Sun Jun 30 23:53:45 2013
+# Created: Thu Jul  4 12:04:50 2013
 #      by: pyside-uic 0.2.13 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -42,14 +42,14 @@ class Ui_MainWindow(object):
         self.searchBox.setObjectName("searchBox")
         self.horizontalLayout_2.addWidget(self.searchBox)
         self.horizontalLayoutWidget_3 = QtGui.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(10, 40, 861, 492))
+        self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(10, 40, 861, 502))
         self.horizontalLayoutWidget_3.setObjectName("horizontalLayoutWidget_3")
         self.horizontalLayout_3 = QtGui.QHBoxLayout(self.horizontalLayoutWidget_3)
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.tableView = QtGui.QTableView(self.horizontalLayoutWidget_3)
-        self.tableView.setMinimumSize(QtCore.QSize(500, 490))
-        self.tableView.setMaximumSize(QtCore.QSize(500, 490))
+        self.tableView.setMinimumSize(QtCore.QSize(500, 500))
+        self.tableView.setMaximumSize(QtCore.QSize(500, 500))
         self.tableView.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableView.setObjectName("tableView")
         self.horizontalLayout_3.addWidget(self.tableView)
@@ -106,12 +106,6 @@ class Ui_MainWindow(object):
         self.graphicsView.setGeometry(QtCore.QRect(10, 200, 331, 251))
         self.graphicsView.setObjectName("graphicsView")
         self.horizontalLayout_3.addWidget(self.showInfo)
-        self.success = QtGui.QLabel(self.centralwidget)
-        self.success.setGeometry(QtCore.QRect(520, 530, 350, 25))
-        self.success.setMaximumSize(QtCore.QSize(350, 25))
-        self.success.setText("")
-        self.success.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.success.setObjectName("success")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 880, 25))
@@ -134,11 +128,14 @@ class Ui_MainWindow(object):
         self.quit.setObjectName("quit")
         self.actionAcerca_de = QtGui.QAction(MainWindow)
         self.actionAcerca_de.setObjectName("actionAcerca_de")
+        self.actionVer_Leeme = QtGui.QAction(MainWindow)
+        self.actionVer_Leeme.setObjectName("actionVer_Leeme")
         self.menuOpciones.addAction(self.add)
         self.menuOpciones.addAction(self.edit)
         self.menuOpciones.addAction(self.btn_delete)
         self.menuOpciones.addSeparator()
         self.menuOpciones.addAction(self.quit)
+        self.AboutUs.addAction(self.actionVer_Leeme)
         self.AboutUs.addAction(self.actionAcerca_de)
         self.menubar.addAction(self.menuOpciones.menuAction())
         self.menubar.addAction(self.AboutUs.menuAction())
@@ -157,8 +154,13 @@ class Ui_MainWindow(object):
         self.menuOpciones.setTitle(QtGui.QApplication.translate("MainWindow", "Archivo", None, QtGui.QApplication.UnicodeUTF8))
         self.AboutUs.setTitle(QtGui.QApplication.translate("MainWindow", "Ayuda", None, QtGui.QApplication.UnicodeUTF8))
         self.add.setText(QtGui.QApplication.translate("MainWindow", "Agregar", None, QtGui.QApplication.UnicodeUTF8))
+        self.add.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+A", None, QtGui.QApplication.UnicodeUTF8))
         self.edit.setText(QtGui.QApplication.translate("MainWindow", "Editar", None, QtGui.QApplication.UnicodeUTF8))
+        self.edit.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+E", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_delete.setText(QtGui.QApplication.translate("MainWindow", "Eliminar", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_delete.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+B", None, QtGui.QApplication.UnicodeUTF8))
         self.quit.setText(QtGui.QApplication.translate("MainWindow", "Salir", None, QtGui.QApplication.UnicodeUTF8))
+        self.quit.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+Q", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAcerca_de.setText(QtGui.QApplication.translate("MainWindow", "Acerca de", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionVer_Leeme.setText(QtGui.QApplication.translate("MainWindow", "Ver Leeme", None, QtGui.QApplication.UnicodeUTF8))
 
