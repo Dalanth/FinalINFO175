@@ -56,3 +56,12 @@ def get_type(nombre):
     tipo=result.fetchone()
     print(tipo[0])
     return tipo
+
+def get_types():
+    con = connect()
+    c = con.cursor()
+    query = """SELECT id_tipo, nombre FROM tipo"""
+    result = c.execute(query)
+    types = result.fetchall()
+    con.close()
+    return types

@@ -47,3 +47,10 @@ class Form(QtGui.QDialog):
                 #Cancel the operation on the ui form
                 self.reject()
 
+        def load_types(self):
+                #Carga los tipos de animales en el combobox
+                types = controller.get_types()
+                self.ui.typeBox.addItem("Todos", -1)
+                for type1 in types: #Agrega los tipos al combobox
+                    self.ui.typeBox.addItem(type1["nombre"], type1["id_tipo"])
+                self.ui.typeBox.setEditable(False)
