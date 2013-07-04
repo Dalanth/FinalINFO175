@@ -57,16 +57,6 @@ def get_animals_name():
     return wordlist
 
 
-def get_types():
-    con = connect()
-    c = con.cursor()
-    query = """SELECT id_tipo, nombre FROM tipo"""
-    result = c.execute(query)
-    types = result.fetchall()
-    con.close()
-    return types
-
-
 def delete(animal):
     exito = False
     con = connect()
