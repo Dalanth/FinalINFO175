@@ -108,6 +108,7 @@ class MainWindow(QtGui.QMainWindow):
         form = view_form.Form(self)
         form.rejected.connect(self.load_animals)
         form.exec_()
+        self.ui.success.setText("Agregado")
 
 
     def show_edit_form(self):

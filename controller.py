@@ -19,12 +19,30 @@ def add_animal(nombre,nombrec,datos,tipo):
     con.close()
     return success
 
+
 def connect():
     #Connect with the database
     con = sqlite3.connect("data.db")
     con.row_factory = sqlite3.Row
     return con
-    
+
+
+def delete(animal):
+    exito = False
+    con = connect()
+    c = con.cursor()
+    query = "DELETE FROM animal WHERE nombre_comun = ?"
+    try:
+        result = c.execute(query, [animal])
+        con.commit()
+        exito = True
+    except sqlite3.Error as e:
+        exito = False
+        print "Error:", e.args[0]
+    con.close()
+    return exito
+
+
 def get_animal(nombre_comun):
     #Gets Data from the database for display
     con = connect()
@@ -73,22 +91,6 @@ def get_animals_name():
     return wordlist
 
 
-def delete(animal):
-    exito = False
-    con = connect()
-    c = con.cursor()
-    query = "DELETE FROM animal WHERE nombre_comun = ?"
-    try:
-        result = c.execute(query, [animal])
-        con.commit()
-        exito = True
-    except sqlite3.Error as e:
-        exito = False
-        print "Error:", e.args[0]
-    con.close()
-    return exito
-
-
 def search_animal(word):
     con = connect()
     c = con.cursor()
@@ -115,6 +117,7 @@ def get_type(nombre):
     tipo = result.fetchone()
     #print(tipo[0])
     return tipo
+
 
 def get_types():
     con = connect()
