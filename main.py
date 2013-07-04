@@ -20,7 +20,6 @@ class MainWindow(QtGui.QMainWindow):
         self.load_types()
         self.directory = QDir()
         self.directory.currentPath()
-        print(self.directory.currentPath())
         self.directory.mkdir("Imagenes")
 
 

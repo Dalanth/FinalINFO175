@@ -4,6 +4,7 @@ from PySide import QtGui, QtCore
 import controller
 import controller_form
 from form import Ui_Form
+from PySide.QtCore import QDir, QCoreApplication
 
 class Form(QtGui.QDialog):
 
@@ -20,6 +21,9 @@ class Form(QtGui.QDialog):
             self.setWindowTitle(u"Editar animal")
             self.ui.btn_add.clicked.connect(self.edit)
         self.ui.btn_cancel.clicked.connect(self.cancel)
+        self.directory = QDir()
+        self.directory.currentPath()
+        self.directory.mkdir("Imagenes")
         
 
     def add(self):
