@@ -106,6 +106,7 @@ class MainWindow(QtGui.QMainWindow):
     def show_add_form(self):
     #Muestra la ventana de agregar animales
         form = view_form.Form(self)
+        form.rejected.connect(self.load_animals)
         form.exec_()
 
 
