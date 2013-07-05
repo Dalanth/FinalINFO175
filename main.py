@@ -6,7 +6,6 @@ import controller
 import sys
 import view_form
 from PySide import QtGui, QtCore
-from PySide.QtCore import QDir, QCoreApplication
 from mainwindow import Ui_MainWindow
 
 class MainWindow(QtGui.QMainWindow):
@@ -18,9 +17,6 @@ class MainWindow(QtGui.QMainWindow):
         self.set_listeners()
         self.load_animals()
         self.load_types()
-        self.directory = QDir()
-        self.directory.currentPath()
-        self.directory.mkdir("Imagenes")
 
 
     def delete(self):
@@ -105,6 +101,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.tableView.clicked.connect(self.display_data)
         self.ui.searchBox.activated[int].connect(self.load_animals_by_type)
         self.ui.search.textChanged.connect(self.load_products_by_search)
+        #self.ui.actionAcerca_de.triggered.
 
 
     def show_add_form(self):
@@ -112,12 +109,14 @@ class MainWindow(QtGui.QMainWindow):
         form = view_form.Form(self)
         form.rejected.connect(self.load_animals)
         form.exec_()
+        self.ui.success.setText("Agregado")
 
 
     def show_edit_form(self):
     #Muestra la ventana de editar productos
         form = view_form.Form(self)
         form.exec_()
+        self.ui.success.setText("Agregado")
 
 
     def display_data(self):
@@ -141,3 +140,4 @@ def run():
 
 if __name__=='__main__':
     run()
+b

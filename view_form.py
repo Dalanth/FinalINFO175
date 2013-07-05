@@ -5,6 +5,7 @@ import controller
 import controller_form
 from form import Ui_Form
 from PySide.QtCore import QDir, QCoreApplication
+import shutil
 
 class Form(QtGui.QDialog):
 
@@ -22,9 +23,9 @@ class Form(QtGui.QDialog):
             self.ui.btn_add.clicked.connect(self.edit)
         self.ui.btn_cancel.clicked.connect(self.cancel)
         self.ui.btn_open.clicked.connect(self.abrir)
-        self.directory = QDir()
-        self.directory.currentPath()
-        self.directory.mkdir("Imagenes")
+        self.directory = QDir.root()
+        print (self.directory.currentPath()+"/Imagenes")
+
         
 
     def add(self):
@@ -50,7 +51,10 @@ class Form(QtGui.QDialog):
         self.reject()
     def abrir(self):
         #abre ventana para buscar imagen en el directorio
-        NameImage = QtGui.QFileDialog . getOpenFileName (self,"Abrir imagen" , "/ home" , "*.png *.jpg *.bmp")
-        print NameImage
+        Dialog = QtGui.QFileDialog()
+        print Dialog.setReadOnly(True)
+        durr = Dialog.getOpenFileName(self,"Abrir imagen" , "?" , "*.png *.jpg *.bmp")
+        shutil.copy(durr[0],(self.directory.currentPath()+"Imagenes"))
+        print durr[0]
         print "abrir imagen"
 
