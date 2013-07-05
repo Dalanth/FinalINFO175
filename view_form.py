@@ -54,7 +54,6 @@ class Form(QtGui.QDialog):
         Dialog = QtGui.QFileDialog()
         print Dialog.setReadOnly(True)
         durr = Dialog.getOpenFileName(self,"Abrir imagen" , "?" , "*.png *.jpg *.bmp")
-        shutil.copy(durr[0],(self.directory.currentPath()+"Imagenes"))
+        shutil.copy(durr[0],(self.directory.currentPath()+"/Imagenes"))
         print durr[0]
         print "abrir imagen"
-
