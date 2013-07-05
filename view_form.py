@@ -24,8 +24,7 @@ class Form(QtGui.QDialog):
         self.ui.btn_cancel.clicked.connect(self.cancel)
         self.ui.btn_open.clicked.connect(self.abrir)
         self.directory = QDir.root()
-        print (self.directory.currentPath()+"/Imagenes")
-
+        #print (self.directory.currentPath()+"/Imagenes/")
         
 
     def add(self):
@@ -51,9 +50,9 @@ class Form(QtGui.QDialog):
         self.reject()
     def abrir(self):
         #abre ventana para buscar imagen en el directorio
-        Dialog = QtGui.QFileDialog()
-        print Dialog.setReadOnly(True)
-        durr = Dialog.getOpenFileName(self,"Abrir imagen" , "?" , "*.png *.jpg *.bmp")
-        shutil.copy(durr[0],(self.directory.currentPath()+"/Imagenes"))
-        print durr[0]
-        print "abrir imagen"
+        dialog = QtGui.QFileDialog()
+        #print Dialog.setReadOnly(True)
+        imagen = dialog.getOpenFileName(self,"Abrir imagen" , "?" , "*.png *.jpg *.bmp")
+        shutil.copy(imagen[0],(self.directory.currentPath()+"/Imagenes/"))
+        #print durr[0]
+        #print "abrir imagen"

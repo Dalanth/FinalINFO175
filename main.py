@@ -5,7 +5,9 @@ import sqlite3
 import controller
 import sys
 import view_form
+import os
 from PySide import QtGui, QtCore
+from PySide.QtCore import QDir
 from mainwindow import Ui_MainWindow
 
 class MainWindow(QtGui.QMainWindow):
@@ -17,8 +19,11 @@ class MainWindow(QtGui.QMainWindow):
         self.set_listeners()
         self.load_animals()
         self.load_types()
+        self.create_folder()
 
-
+    def about(self):
+        message = u'Integrantes: \n- Nicolas Aravena\n-Sebastian Matamala\n-Arturo Reyes'
+        self.ui.aboutUs = QtGui.QMessageBox.information(self, 'Acerca de Animales', message)
     def delete(self):
     #Elimina un animal de la base de datos mediante el controlador
         model = self.ui.tableView.model()
@@ -45,6 +50,12 @@ class MainWindow(QtGui.QMainWindow):
                                             u"Error al eliminar el animal",
                                             QtGui.QMessageBox.Ok, QtGui.QMessageBox.Ok)
                     return False
+
+
+    def create_folder(self):
+        self.directory = QDir.root()
+        if not os.path.exists(self.directory.currentPath()+"/Imagenes"):
+            os.makedirs(self.directory.currentPath()+"/Imagenes")
 
 
     def load_types(self):
@@ -101,7 +112,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.tableView.clicked.connect(self.display_data)
         self.ui.searchBox.activated[int].connect(self.load_animals_by_type)
         self.ui.search.textChanged.connect(self.load_products_by_search)
-        #self.ui.actionAcerca_de.triggered.
+        self.ui.actionAcerca_de.triggered.connect(self.about)
 
 
     def show_add_form(self):
@@ -109,14 +120,12 @@ class MainWindow(QtGui.QMainWindow):
         form = view_form.Form(self)
         form.rejected.connect(self.load_animals)
         form.exec_()
-        self.ui.success.setText("Agregado")
 
 
     def show_edit_form(self):
     #Muestra la ventana de editar productos
         form = view_form.Form(self)
         form.exec_()
-        self.ui.success.setText("Agregado")
 
 
     def display_data(self):
