@@ -21,6 +21,7 @@ class Form(QtGui.QDialog):
             self.setWindowTitle(u"Editar animal")
             self.ui.btn_add.clicked.connect(self.edit)
         self.ui.btn_cancel.clicked.connect(self.cancel)
+        self.ui.btn_open.clicked.connect(self.abrir)
         self.directory = QDir()
         self.directory.currentPath()
         self.directory.mkdir("Imagenes")
@@ -47,3 +48,9 @@ class Form(QtGui.QDialog):
     def cancel(self):
         #Cancel the operation on the ui form
         self.reject()
+    def abrir(self):
+        #abre ventana para buscar imagen en el directorio
+        NameImage = QtGui.QFileDialog . getOpenFileName (self,"Abrir imagen" , "/ home" , "*.png *.jpg *.bmp")
+        print NameImage
+        print "abrir imagen"
+
