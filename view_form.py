@@ -4,7 +4,7 @@ from PySide import QtGui, QtCore
 import controller
 import controller_form
 from form import Ui_Form
-from PySide.QtCore import QDir, QCoreApplication
+from PySide.QtCore import QDir, QCoreApplication, QFileInfo
 import shutil
 
 class Form(QtGui.QDialog):
@@ -51,8 +51,9 @@ class Form(QtGui.QDialog):
     def abrir(self):
         #abre ventana para buscar imagen en el directorio
         dialog = QtGui.QFileDialog()
-        #print Dialog.setReadOnly(True)
         imagen = dialog.getOpenFileName(self,"Abrir imagen" , "?" , "*.png *.jpg *.bmp")
-        shutil.copy(imagen[0],(self.directory.currentPath()+"/Imagenes/"))
-        #print durr[0]
+        Ifile = QFileInfo(imagen[0])
+        #shutil.copy(imagen[0],(self.directory.currentPath()+"/Imagenes/"))
+        #controller_form.add_image_dir(self.directory.currentPath()+"/Imagenes/"))
+        print Ifile.fileName()
         #print "abrir imagen"

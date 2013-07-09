@@ -11,3 +11,10 @@ def get_id_type(tipo):
     result = id_tipo[0]
     con.close()
     return result
+
+def add_image_dir(dire):
+	con = controller.connect()
+	c = con.cursor()
+	query = """INSERT INTO imagen (ubicacion) VALUES (?) """
+	c.execute(query,[dire])
+	con.close
