@@ -53,7 +53,6 @@ class Form(QtGui.QDialog):
         dialog = QtGui.QFileDialog()
         imagen = dialog.getOpenFileName(self,"Abrir imagen" , "?" , "*.png *.jpg *.bmp")
         Ifile = QFileInfo(imagen[0])
-        #shutil.copy(imagen[0],(self.directory.currentPath()+"/Imagenes/"))
-        #controller_form.add_image_dir(self.directory.currentPath()+"/Imagenes/"))
-        print Ifile.fileName()
+        shutil.copy(imagen[0],(self.directory.currentPath()+"/Imagenes/"))
+        controller_form.add_image_dir(Ifile.fileName())
         #print "abrir imagen"

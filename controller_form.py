@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sqlite3
 import controller
+from PySide.QtCore import QDir, QFileInfo
 
 def get_id_type(tipo):
     con = controller.connect()
@@ -13,8 +14,11 @@ def get_id_type(tipo):
     return result
 
 def add_image_dir(dire):
-	con = controller.connect()
-	c = con.cursor()
-	query = """INSERT INTO imagen (ubicacion) VALUES (?) """
-	c.execute(query,[dire])
-	con.close
+    con = controller.connect()
+    c = con.cursor()
+    direccion = (QDir.currentPath()+"/Imagenes/"+dire)
+    print direccion
+    query = "INSERT INTO imagen (ubicacion) VALUES(?) "
+    c.execute(query,[direccion])
+    con.commit()
+    con.close
