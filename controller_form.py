@@ -17,7 +17,6 @@ def add_image_dir(dire):
     con = controller.connect()
     c = con.cursor()
     direccion = (QDir.currentPath()+"/Imagenes/"+dire)
-    print direccion
     query = "INSERT INTO imagen (ubicacion) VALUES(?) "
     c.execute(query,[direccion])
     con.commit()
