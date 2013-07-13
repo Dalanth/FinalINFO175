@@ -5,6 +5,7 @@ import controller
 import controller_form
 from form import Ui_Form
 from PySide.QtCore import QDir, QCoreApplication, QFileInfo
+from PySide.QtGui import *
 import shutil
 
 class Form(QtGui.QDialog):
@@ -24,6 +25,8 @@ class Form(QtGui.QDialog):
         self.ui.btn_cancel.clicked.connect(self.cancel)
         self.ui.btn_open.clicked.connect(self.abrir)
         self.directory = QDir.root()
+        self.display = QGraphicsView()
+        self.ui.scrollArea.setWidget(self.display)
         #print (self.directory.currentPath()+"/Imagenes/")
         
 
@@ -55,3 +58,7 @@ class Form(QtGui.QDialog):
         Ifile = QFileInfo(imagen[0])
         shutil.copy(imagen[0],(self.directory.currentPath()+"/Imagenes/"))
         controller_form.add_image_dir(Ifile.fileName())
+        pix = controller_form.get_image_pix()
+        scene = QGraphicsScene()
+        scene.addItem(pix)
+        self.display.setScene(scene)

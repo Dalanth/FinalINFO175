@@ -127,3 +127,4 @@ def get_types():
     types = result.fetchall()
     con.close()
     return types
+

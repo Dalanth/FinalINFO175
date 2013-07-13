@@ -2,6 +2,7 @@
 import sqlite3
 import controller
 from PySide.QtCore import QDir, QFileInfo
+from PySide.QtGui import QGraphicsPixmapItem, QPixmap
 
 def get_id_type(tipo):
     con = controller.connect()
@@ -21,3 +22,11 @@ def add_image_dir(dire):
     c.execute(query,[direccion])
     con.commit()
     con.close
+
+def get_image_pix():
+    #funcion de prueba
+    direccion = (QDir.currentPath()+"/Imagenes/Outrageous Draven.jpg")
+    pixMap = QPixmap(direccion)
+    pixMap.scaledToHeight(50)
+    item = QGraphicsPixmapItem(pixMap)
+    return item
