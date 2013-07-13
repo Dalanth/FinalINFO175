@@ -3,11 +3,13 @@
 
 import sqlite3
 import controller
+import controller_form
 import sys
 import view_form
 import os
 from PySide import QtGui, QtCore
 from PySide.QtCore import QDir
+from PySide.QtGui import *
 from mainwindow import Ui_MainWindow
 
 class MainWindow(QtGui.QMainWindow):
@@ -20,6 +22,8 @@ class MainWindow(QtGui.QMainWindow):
         self.load_animals()
         self.load_types()
         self.create_folder()
+        self.scene = QGraphicsScene()
+        self.ui.graphicsView.setScene(self.scene)
 
     def about(self):
         message = u'Integrantes: \n- Nicolas Aravena\n-Sebastian Matamala\n-Arturo Reyes'
@@ -129,11 +133,14 @@ class MainWindow(QtGui.QMainWindow):
 
 
     def display_data(self):
+        #Modificado display para que muestre la imagen que se 
         model = self.ui.tableView.model()
         index = self.ui.tableView.currentIndex()
         data = model.index(index.row(), 0, QtCore.QModelIndex()).data()
         animal = controller.get_animal(data)
         tipo = controller.get_type(data)
+        pixImage = controller_form.get_image_pix()
+        self.scene.addItem(pixImage)
         self.ui.common.setText(animal[1])
         self.ui.cientific.setText(animal[2])
         self.ui.type.setText(tipo[0])

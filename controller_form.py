@@ -5,6 +5,7 @@ from PySide.QtCore import QDir, QFileInfo
 from PySide.QtGui import QGraphicsPixmapItem, QPixmap
 
 def get_id_type(tipo):
+    #Obtiene el tipo del animal
     con = controller.connect()
     c = con.cursor()
     query = """SELECT id_tipo FROM tipo WHERE nombre=?"""
@@ -15,6 +16,8 @@ def get_id_type(tipo):
     return result
 
 def add_image_dir(dire):
+    #Agrega imagen a la base de datos
+    #No relaciona la imagen con ningun animal ARREGLEN PORFA!
     con = controller.connect()
     c = con.cursor()
     direccion = (QDir.currentPath()+"/Imagenes/"+dire)
@@ -24,9 +27,17 @@ def add_image_dir(dire):
     con.close
 
 def get_image_pix():
-    #funcion de prueba
-    direccion = (QDir.currentPath()+"/Imagenes/Outrageous Draven.jpg")
+    #Retorna la imagen almacenada en un PixMapItem para ser usada en una QGraphicsScene
+    #Actualmente solo reterna la imagen de id_imagen = 4 pero puede ser arreglada para que
+    #funcione con cualquier imagen de la base de datos con facilidad siempre y cuando se arregle
+    #el problema de la funcion que se encuentra sobre esta ARREGLEN PORFA!!
+    con = controller.connect()
+    c = con.cursor()
+    query = "SELECT ubicacion FROM imagen"
+    c.execute(query)
+    result = c.fetchone()
+    direccion = result[0]
+    print (direccion)
     pixMap = QPixmap(direccion)
-    pixMap.scaledToHeight(50)
     item = QGraphicsPixmapItem(pixMap)
     return item
