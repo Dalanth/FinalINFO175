@@ -136,6 +136,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.common.setText(animal[1])
         self.ui.cientific.setText(animal[2])
         self.ui.type.setText(tipo[0])
+        self.ui.data.setWordWrap(True)
         self.ui.data.setText(animal[3])
 
 def run():
