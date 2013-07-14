@@ -136,6 +136,7 @@ class MainWindow(QtGui.QMainWindow):
 
     def display_data(self):
         #Modificado display para que muestre la imagen que se 
+        #CARGA UNA IMAGEN SOBRE OTRA!!! REVISAR
         model = self.ui.tableView.model()
         index = self.ui.tableView.currentIndex()
         data = model.index(index.row(), 0, QtCore.QModelIndex()).data()
