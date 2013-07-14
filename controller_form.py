@@ -4,6 +4,23 @@ import controller
 from PySide.QtCore import QDir, QFileInfo
 from PySide.QtGui import QGraphicsPixmapItem, QPixmap
 
+def add_animal(common,cientific,data,id_type):
+    #Add a new product to the table 'product' on the database
+    success = False
+    con = connect()
+    c = con.cursor()
+    values = [common,cientific,data,id_type]
+    query = """INSERT INTO animal (nombre_comun, nombre_cientifico, datos, fk_id_tipo) VALUES(?,?,?,?)"""
+    try:
+        result = c.execute(query, values)
+        success = True
+        con.commit()
+    except sqlite3.Error as e:
+        success = False
+        print "Error: ", e.args[0]
+    con.close()
+    return success
+
 def get_id_type(tipo):
     #Obtiene el id del tipo
     con = controller.connect()
@@ -31,17 +48,17 @@ def add_image_dir(animal,dire):
     con = controller.connect()
     c = con.cursor()
     pos = 0
-    path = ""
+    name = ""
     while dire[pos] != ".":
-        path = path + dire[pos]
+        name = name + dire[pos]
         pos += 1
     format = ""
     while pos <= len(dire)-1:
         format = format + dire[pos]
         pos += 1
-    #print (path+format)
+    #print (name+format)
     query = """INSERT INTO imagen (ubicacion,formato,fk_id_animal) VALUES(?,?,?)"""
-    c.execute(query,[path,format,animal])
+    c.execute(query,[name,format,animal])
     con.commit()
     con.close
 
@@ -64,3 +81,29 @@ def get_root_image(now):
     pixMap = QPixmap(now)
     item = QGraphicsPixmapItem(pixMap)
     return item
+
+def get_id_image(image):
+    con = controller.connect()
+    c = con.cursor()
+    query = """SELECT id_image FROM imagen WHERE ubicacion=?"""
+    c.execute(query,[image])
+    id_image = c.fetchone()
+    result = id_image[0]
+
+def edit_animal(id_animal,common,cientific,data,id_type):
+    #Add a new product to the table 'product' on the database
+    success = False
+    con = controller.connect()
+    c = con.cursor()
+    values = [common,cientific,data,id_type,id_animal]
+    query = """UPDATE animal SET nombre_comun = ?, nombre_cientifico =?,
+            datos = ?, fk_id_tipo = ? WHERE id_animal = ?"""
+    try:
+        result = c.execute(query, values)
+        success = True
+        con.commit()
+    except sqlite3.Error as e:
+        success = False
+        print "Error: ", e.args[0]
+    con.close()
+    return success
