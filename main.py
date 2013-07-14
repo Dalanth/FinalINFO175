@@ -14,6 +14,7 @@ from mainwindow import Ui_MainWindow
 
 class MainWindow(QtGui.QMainWindow):
     
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
@@ -55,12 +56,10 @@ class MainWindow(QtGui.QMainWindow):
                                             QtGui.QMessageBox.Ok, QtGui.QMessageBox.Ok)
                     return False
 
-
     def create_folder(self):
         self.directory = QDir.root()
         if not os.path.exists(self.directory.currentPath()+"/Imagenes"):
             os.makedirs(self.directory.currentPath()+"/Imagenes")
-
 
     def load_types(self):
         #Carga los tipos de animales en el combobox
@@ -69,7 +68,6 @@ class MainWindow(QtGui.QMainWindow):
         for type1 in types: #Agrega los tipos al combobox
             self.ui.searchBox.addItem(type1["nombre"], type1["id_tipo"])
         self.ui.searchBox.setEditable(False)
-
 
     def load_animals(self, animals=None):
         if animals is None:
@@ -86,7 +84,6 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.tableView.setColumnWidth(0, 150)
         self.ui.tableView.setColumnWidth(1, 330)
 
-
     def load_products_by_search(self):
         word = self.ui.search.text()
         animalslist = controller.get_animals_name()
@@ -97,7 +94,6 @@ class MainWindow(QtGui.QMainWindow):
         completer.setCompletionMode(QtGui.QCompleter.InlineCompletion)
         self.ui.search.setCompleter(completer)
 
-
     def load_animals_by_type(self):
         id_tipo = self.ui.searchBox.itemData(self.ui.searchBox.currentIndex())
         if id_tipo == -1: #si la opcion seleccionada es "todos", muestra todos los animales
@@ -105,7 +101,6 @@ class MainWindow(QtGui.QMainWindow):
         else: #carga los animales por tipo
             animals = controller.get_animals_by_type(id_tipo)
         self.load_animals(animals)
-
 
     def set_listeners(self):
     #Sets up button listeners
@@ -118,19 +113,16 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.search.textChanged.connect(self.load_products_by_search)
         self.ui.actionAcerca_de.triggered.connect(self.about)
 
-
     def show_add_form(self):
     #Muestra la ventana de agregar animales
         form = view_form.Form(self)
         form.rejected.connect(self.load_animals)
         form.exec_()
 
-
     def show_edit_form(self):
     #Muestra la ventana de editar productos
         form = view_form.Form(self)
         form.exec_()
-
 
     def display_data(self):
         #Modificado display para que muestre la imagen que se 
@@ -146,13 +138,11 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.type.setText(tipo[0])
         self.ui.data.setText(animal[3])
 
-
 def run():
     app = QtGui.QApplication(sys.argv)
     main = MainWindow()
     main.show()
     sys.exit(app.exec_())
-
 
 if __name__=='__main__':
     run()
