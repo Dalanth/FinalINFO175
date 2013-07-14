@@ -7,7 +7,7 @@ from PySide.QtGui import QGraphicsPixmapItem, QPixmap
 def add_animal(common,cientific,data,id_type):
     #Add a new product to the table 'product' on the database
     success = False
-    con = connect()
+    con = controller.connect()
     c = con.cursor()
     values = [common,cientific,data,id_type]
     query = """INSERT INTO animal (nombre_comun, nombre_cientifico, datos, fk_id_tipo) VALUES(?,?,?,?)"""
@@ -76,11 +76,19 @@ def get_image_pix(id_animal):
     item = QGraphicsPixmapItem(pixMap)
     return item
 
-def get_root_image(now):
-    #Carga la imagen desde la ruta actual sin almacenarla en la base de datos
-    pixMap = QPixmap(now)
+def get_root_image(path):
+    #Carga la imagen desde la ruta solicitada sin almacenarla en la base de datos
+    pixMap = QPixmap(path)
     item = QGraphicsPixmapItem(pixMap)
     return item
+
+def get_image(id_animal):
+    con = controller.connect()
+    c = con.cursor()
+    query = """SELECT ubicacion, formato FROM imagen WHERE fk_id_animal =?"""
+    c.execute(query,[id_animal])
+    image = c.fetchone()
+    return image
 
 def get_id_image(image):
     con = controller.connect()

@@ -16,13 +16,15 @@ class Form(QtGui.QDialog):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         types = controller.get_types()
+        self.directory = QDir.root()
+        self.display = QGraphicsView()
+        self.ui.scrollArea.setWidget(self.display)
         for tipo in types:
             self.ui.typeBox.addItem(tipo["nombre"], tipo["id_tipo"])
 
         if common_name is None:
             self.ui.btn_done.clicked.connect(self.add)
             if image is None:
-                self.ui.btn_open.clicked.connect(self.open)
                 self.ui.image.setPlainText(image)
         else:
             self.setWindowTitle(u"Editar animal")
@@ -33,20 +35,22 @@ class Form(QtGui.QDialog):
             self.ui.data.setText(animal_data["datos"])
             tipo = self.ui.typeBox.currentText()
             id_type = controller_form.get_id_type(tipo)
+
             id_animal = controller_form.get_id_animal(common_name)
-            try:
-                self.imagen = controller_form.get_image_pix(id_animal)
-                path = QDir.currentPath() + "/Imagenes/" + self.imagen[0] + self.imagen[1]
-                print path
-                self.ui.image.setPlainText(path)
-            except:
-                print "hola"
+            self.pixImagen = controller_form.get_image_pix(id_animal)
+            self.image = controller_form.get_image(id_animal)
+            self.path = QDir.currentPath() + "/Imagenes/" + self.image[0] + self.image[1]
+            self.ui.image.setPlainText(self.path)
+            Ifile = QFileInfo(self.path)
+            pix = controller_form.get_root_image(self.path)
+            scene = QGraphicsScene()
+            scene.addItem(pix)
+            self.display.setScene(scene)
+            self.ui.image.setPlainText(self.path)
             self.ui.btn_done.clicked.connect(self.edit)
 
+        self.ui.btn_open.clicked.connect(self.open)
         self.ui.btn_cancel.clicked.connect(self.cancel)
-        self.directory = QDir.root()
-        self.display = QGraphicsView()
-        self.ui.scrollArea.setWidget(self.display)
         #print (self.directory.currentPath()+"/Imagenes/")
         
     def add(self):
@@ -57,13 +61,13 @@ class Form(QtGui.QDialog):
         tipo = self.ui.typeBox.currentText()
         id_type = controller_form.get_id_type(tipo)
         result = controller_form.add_animal(common, cientific, other, id_type)
-        image = self.ui.image.toPlainText()
+        path = self.ui.image.toPlainText()
         #print image
-        if image != "":
+        if path != "":
             #Agrega la imagen solo si existe una direccion
             id_animal = controller_form.get_id_animal(common)
-            shutil.copy(image,(self.directory.currentPath()+"/Imagenes/"))
-            Ifile = QFileInfo(image)
+            shutil.copy(path,(self.directory.currentPath()+"/Imagenes/"))
+            Ifile = QFileInfo(path)
             controller_form.add_image_dir(id_animal,Ifile.fileName())
 
         if result:
@@ -85,19 +89,17 @@ class Form(QtGui.QDialog):
         id_type = controller_form.get_id_type(tipo)
         result = controller_form.edit_animal(id_animal,common,cientific,other,id_type)
         path = self.ui.image.toPlainText()
-        if path != "":
-            Ifile = QFileInfo(path)
-            controller_form.get_image_pix(id_animal)
-            scene = QGraphicsScene()
-            scene.addItem(pix)
-            self.display.setScene(scene)
-            self.ui.image.setPlainText(path)
-
-            #controller_form.add_image_dir(id_animal,Ifile.fileName())
+        #print path
+        Ifile = QFileInfo(path)
+        pix = controller_form.get_root_image(path)
+        scene = QGraphicsScene()
+        scene.addItem(pix)
+        self.display.setScene(scene)
+        self.ui.image.setPlainText(path)
         if result:
             self.reject()
         else:
-            self.ui.message.setText("Hubo un problema al intentar editar el producto")
+            self.ui.message.setText("Hubo un problema al intentar editar el animal")
 
     def open(self):
         #abre ventana para buscar imagen en el directorio
@@ -110,4 +112,5 @@ class Form(QtGui.QDialog):
         scene = QGraphicsScene()
         scene.addItem(pix)
         self.display.setScene(scene)
-        self.ui.image.setPlainText(imagen[0])
+        if imagen[0] != "":
+            self.ui.image.setPlainText(imagen[0])
