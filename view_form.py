@@ -11,7 +11,7 @@ import shutil
 class Form(QtGui.QDialog):
 
 
-    def __init__(self, parent=None, common_name=None):
+    def __init__(self, parent=None, common_name=None, image=None):
         QtGui.QDialog.__init__(self, parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -20,11 +20,13 @@ class Form(QtGui.QDialog):
             self.ui.typeBox.addItem(tipo["nombre"], tipo["id_tipo"])
         if common_name is None:
             self.ui.btn_done.clicked.connect(self.add)
+            if image is None:
+                self.ui.btn_open.clicked.connect(self.open)
+                self.ui.image.setPlainText(image)
         else:
             self.setWindowTitle(u"Editar animal")
             self.ui.btn_add.clicked.connect(self.edit)
         self.ui.btn_cancel.clicked.connect(self.cancel)
-        self.ui.btn_open.clicked.connect(self.abrir)
         self.directory = QDir.root()
         self.display = QGraphicsView()
         self.ui.scrollArea.setWidget(self.display)
@@ -38,41 +40,37 @@ class Form(QtGui.QDialog):
         tipo = self.ui.typeBox.currentText()
         id_type = controller_form.get_id_type(tipo)
         result = controller.add_animal(common, cientific, other, id_type)
-        
-        #Para que pesque el FK del animal hay que agregarlo desde acá la imagen
-        #el tema es con el abrir y almacenar los datos
-        id_animal = controller_form.get_id_animal(common)
-        #asdf = self.abrir()
-        #print asdf
-        #if asdf[0]:
-            #shutil.copy(asdf[2],(self.directory.currentPath()+"/Imagenes/"))
-        #    controller_form.add_image_dir(id_animal,asdf[1].fileName())
+        image = self.ui.image.toPlainText()
+        #print image
+        if image != "":
+            #Agrega la imagen solo si existe una direccion
+            id_animal = controller_form.get_id_animal(common)
+            shutil.copy(image,(self.directory.currentPath()+"/Imagenes/"))
+            Ifile = QFileInfo(image)
+            controller_form.add_image_dir(id_animal,Ifile.fileName())
 
         if result:
             self.reject()
         else:
             self.ui.message.setText("Hubo un problema al intentar agregar el animal")
 
-    def edit(self):
-        #Edit an existent animal in the database
-        print "edito animal"
-
     def cancel(self):
         #Cancela la operación
         self.reject()
 
-    def abrir(self):
+    def edit(self):
+        #Edit an existent animal in the database
+        print "edito animal"
+
+    def open(self):
         #abre ventana para buscar imagen en el directorio
         dialog = QtGui.QFileDialog()
-        imagen = dialog.getOpenFileName(self,"Abrir imagen" , "?" , "*.png *.jpg *.bmp")
+        imagen = dialog.getOpenFileName(self,"Abrir imagen" , "?" , "Image Files (*.png *.jpg *.bmp)")
         Ifile = QFileInfo(imagen[0])
-        print Ifile
-        print imagen[0]
-        shutil.copy(imagen[0],(self.directory.currentPath()+"/Imagenes/"))
-        controller_form.add_image_dir(Ifile.fileName())
-        pix = controller_form.get_image_pix()
+        #print Ifile
+        #print imagen[0]
+        pix = controller_form.get_root_image(imagen[0])
         scene = QGraphicsScene()
         scene.addItem(pix)
         self.display.setScene(scene)
-        #info = [True, Ifile]
-        #return info
+        self.ui.image.setPlainText(imagen[0])

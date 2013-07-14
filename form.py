@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'form.ui'
 #
-# Created: Thu Jul  4 12:06:42 2013
+# Created: Sun Jul 14 03:53:39 2013
 #      by: pyside-uic 0.2.13 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,10 +43,10 @@ class Ui_Form(object):
         self.label_4.setGeometry(QtCore.QRect(20, 280, 152, 21))
         self.label_4.setObjectName("label_4")
         self.btn_open = QtGui.QPushButton(Form)
-        self.btn_open.setGeometry(QtCore.QRect(20, 300, 81, 27))
+        self.btn_open.setGeometry(QtCore.QRect(250, 300, 81, 27))
         self.btn_open.setObjectName("btn_open")
         self.btn_delete = QtGui.QPushButton(Form)
-        self.btn_delete.setGeometry(QtCore.QRect(110, 300, 81, 27))
+        self.btn_delete.setGeometry(QtCore.QRect(340, 300, 81, 27))
         self.btn_delete.setObjectName("btn_delete")
         self.scrollArea = QtGui.QScrollArea(Form)
         self.scrollArea.setGeometry(QtCore.QRect(20, 330, 401, 111))
@@ -69,6 +69,12 @@ class Ui_Form(object):
         self.typeBox = QtGui.QComboBox(Form)
         self.typeBox.setGeometry(QtCore.QRect(20, 130, 401, 25))
         self.typeBox.setObjectName("typeBox")
+        self.image = QtGui.QTextEdit(Form)
+        self.image.setGeometry(QtCore.QRect(20, 300, 220, 25))
+        self.image.setMinimumSize(QtCore.QSize(220, 25))
+        self.image.setMaximumSize(QtCore.QSize(220, 25))
+        self.image.setReadOnly(True)
+        self.image.setObjectName("image")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

@@ -20,15 +20,14 @@ def get_id_animal(animal):
     con = controller.connect()
     c = con.cursor()
     query = """SELECT id_animal FROM animal WHERE nombre_comun=?"""
-    c.execute(query,[animal])
+    c.execute(query, [animal])
     id_animal = c.fetchone()
     result = id_animal[0]
     con.close()
     return result
 
 def add_image_dir(animal,dire):
-    #Agrega imagen a la base de datos
-    #No relaciona la imagen con ningun animal ARREGLEN PORFA!
+    #Agrega la imagen a la base de datos
     con = controller.connect()
     c = con.cursor()
     pos = 0
@@ -40,27 +39,28 @@ def add_image_dir(animal,dire):
     while pos <= len(dire)-1:
         format = format + dire[pos]
         pos += 1
-    print (path+format)
+    #print (path+format)
     query = """INSERT INTO imagen (ubicacion,formato,fk_id_animal) VALUES(?,?,?)"""
     c.execute(query,[path,format,animal])
     con.commit()
     con.close
 
-def get_image_pix():
-    #Retorna la imagen almacenada en un PixMapItem para ser usada en una QGraphicsScene
-    #Actualmente solo reterna la imagen de id_imagen = 4 pero puede ser arreglada para que
-    #funcione con cualquier imagen de la base de datos con facilidad siempre y cuando se arregle
-    #el problema de la funcion que se encuentra sobre esta ARREGLEN PORFA!!
+def get_image_pix(id_animal):
+    #Carga la imagen ya almacenada en la base de datos
     con = controller.connect()
     c = con.cursor()
-    query = "SELECT ubicacion, formato, fk_id_animal FROM imagen"
-    c.execute(query)
+    query = """SELECT ubicacion, formato FROM imagen WHERE fk_id_animal = ?"""
+    c.execute(query,[id_animal])
     result = c.fetchone()
     path = result[0]
     format = result[1]
-    key = result[2]
-    #print (QDir.currentPath()+"/Imagenes/"+path+format)
     image = QDir.currentPath()+"/Imagenes/"+path+format
     pixMap = QPixmap(image)
+    item = QGraphicsPixmapItem(pixMap)
+    return item
+
+def get_root_image(now):
+    #Carga la imagen desde la ruta actual sin almacenarla en la base de datos
+    pixMap = QPixmap(now)
     item = QGraphicsPixmapItem(pixMap)
     return item

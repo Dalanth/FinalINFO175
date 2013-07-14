@@ -13,7 +13,7 @@ from PySide.QtGui import *
 from mainwindow import Ui_MainWindow
 
 class MainWindow(QtGui.QMainWindow):
-    
+
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -27,8 +27,9 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.graphicsView.setScene(self.scene)
 
     def about(self):
-        message = u'Integrantes: \n- Nicolas Aravena\n-Sebastian Matamala\n-Arturo Reyes'
+        message = u'Integrantes: \n- Nicolas Aravena\n- Sebastian Matamala\n- Arturo Reyes'
         self.ui.aboutUs = QtGui.QMessageBox.information(self, 'Acerca de Animales', message)
+
     def delete(self):
     #Elimina un animal de la base de datos mediante el controlador
         model = self.ui.tableView.model()
@@ -121,8 +122,17 @@ class MainWindow(QtGui.QMainWindow):
 
     def show_edit_form(self):
     #Muestra la ventana de editar productos
-        form = view_form.Form(self)
-        form.exec_()
+        model = self.ui.tableView.model()
+        index = self.ui.tableView.currentIndex()
+        if index.row() == -1: ##No row selected
+            self.ui.msgBox = QtGui.QMessageBox.information(self, u'Error',
+                                    u"Debe seleccionar el animal que desea editar")
+            return False
+        else:
+            animal = model.index(index.row(), 0, QtCore.QModelIndex()).data()
+            form = view_form.Form(self, animal)
+            form.rejected.connect(self.load_animals)
+            form.exec_()
 
     def display_data(self):
         #Modificado display para que muestre la imagen que se 
@@ -131,7 +141,8 @@ class MainWindow(QtGui.QMainWindow):
         data = model.index(index.row(), 0, QtCore.QModelIndex()).data()
         animal = controller.get_animal(data)
         tipo = controller.get_type(data)
-        pixImage = controller_form.get_image_pix()
+        id_animal = controller_form.get_id_animal(animal[1])
+        pixImage = controller_form.get_image_pix(id_animal)
         self.scene.addItem(pixImage)
         self.ui.common.setText(animal[1])
         self.ui.cientific.setText(animal[2])
