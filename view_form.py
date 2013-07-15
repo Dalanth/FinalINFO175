@@ -56,24 +56,29 @@ class Form(QtGui.QDialog):
     def add(self):
         #Add a new animal
         common = self.ui.common_name.toPlainText()
-        cientific = self.ui.cientific_name.toPlainText()
-        other = self.ui.data.toPlainText()
-        tipo = self.ui.typeBox.currentText()
-        id_type = controller_form.get_id_type(tipo)
-        result = controller_form.add_animal(common, cientific, other, id_type)
-        path = self.ui.image.toPlainText()
-        #print image
-        if path != "":
-            #Agrega la imagen solo si existe una direccion
-            id_animal = controller_form.get_id_animal(common)
-            shutil.copy(path,(self.directory.currentPath()+"/Imagenes/"))
-            Ifile = QFileInfo(path)
-            controller_form.add_image_dir(id_animal,Ifile.fileName())
-
-        if result:
-            self.reject()
+        if common == "":
+            self.ui.msgBox = QtGui.QMessageBox.information(self, u'Atención!',
+                                    u"Debe ingresar al menos el nombre común")
         else:
-            self.ui.message.setText("Hubo un problema al intentar agregar el animal")
+            cientific = self.ui.cientific_name.toPlainText()
+            other = self.ui.data.toPlainText()
+            tipo = self.ui.typeBox.currentText()
+            id_type = controller_form.get_id_type(tipo)
+            result = controller_form.add_animal(common, cientific, other, id_type)
+            path = self.ui.image.toPlainText()
+            #print image
+            if path != "":
+                #Agrega la imagen solo si existe una direccion
+                id_animal = controller_form.get_id_animal(common)
+                shutil.copy(path,(self.directory.currentPath()+"/Imagenes/"))
+                Ifile = QFileInfo(path)
+                controller_form.add_image_dir(id_animal,Ifile.fileName())
+
+            if result:
+                self.reject()
+            else:
+                self.ui.msgBox = QtGui.QMessageBox.information(self, u'Atención!',
+                                    u"Hubo un problema al intentar agregar el animal")
 
     def cancel(self):
         #Cancela la operación
@@ -83,23 +88,28 @@ class Form(QtGui.QDialog):
         #Edit an existent animal in the database
         id_animal = controller_form.get_id_animal(self.common)
         common = self.ui.common_name.toPlainText()
-        cientific = self.ui.cientific_name.toPlainText()
-        other = self.ui.data.toPlainText()
-        tipo = self.ui.typeBox.currentText()
-        id_type = controller_form.get_id_type(tipo)
-        result = controller_form.edit_animal(id_animal,common,cientific,other,id_type)
-        path = self.ui.image.toPlainText()
-        #print path
-        Ifile = QFileInfo(path)
-        pix = controller_form.get_root_image(path)
-        scene = QGraphicsScene()
-        scene.addItem(pix)
-        self.display.setScene(scene)
-        self.ui.image.setPlainText(path)
-        if result:
-            self.reject()
+        if common == "":
+            self.ui.msgBox = QtGui.QMessageBox.information(self, u'Atención!',
+                                    u"El nombre común no puede estar en blanco")
         else:
-            self.ui.message.setText("Hubo un problema al intentar editar el animal")
+            cientific = self.ui.cientific_name.toPlainText()
+            other = self.ui.data.toPlainText()
+            tipo = self.ui.typeBox.currentText()
+            id_type = controller_form.get_id_type(tipo)
+            result = controller_form.edit_animal(id_animal,common,cientific,other,id_type)
+            path = self.ui.image.toPlainText()
+            #print path
+            Ifile = QFileInfo(path)
+            pix = controller_form.get_root_image(path)
+            scene = QGraphicsScene()
+            scene.addItem(pix)
+            self.display.setScene(scene)
+            self.ui.image.setPlainText(path)
+            if result:
+                self.reject()
+            else:
+                self.ui.msgBox = QtGui.QMessageBox.information(self, u'Atención!',
+                                        u"Hubo un problema al intentar editar el animal")
 
     def open(self):
         #abre ventana para buscar imagen en el directorio

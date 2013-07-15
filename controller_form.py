@@ -2,7 +2,7 @@
 import sqlite3
 import controller
 from PySide.QtCore import QDir, QFileInfo
-from PySide.QtGui import QGraphicsPixmapItem, QPixmap
+from PySide.QtGui import QGraphicsPixmapItem, QPixmap, QImage
 
 def add_animal(common,cientific,data,id_type):
     #Add a new product to the table 'product' on the database
