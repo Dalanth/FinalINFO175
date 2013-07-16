@@ -39,7 +39,6 @@ class Form(QtGui.QDialog):
             id_animal = controller_form.get_id_animal(common_name)
             self.image = controller_form.get_image(id_animal)
             if self.image:
-				"""Muestra la imagen y la reduce"""
                 self.path = QDir.currentPath() + "/images/" + self.image[0] + self.image[1]
                 self.ui.image.setPlainText(self.path)
                 Ifile = QFileInfo(self.path)
@@ -67,7 +66,9 @@ class Form(QtGui.QDialog):
         self.ui.btn_cancel.clicked.connect(self.cancel)
         
     def add(self):
-        """Add a new animal"""
+        """
+        Agrega un nuevo animal
+        """
         common = self.ui.common_name.toPlainText()
         if common == "":
             self.ui.msgBox = QtGui.QMessageBox.information(self, u'Atención!',
@@ -99,11 +100,15 @@ class Form(QtGui.QDialog):
                                     u"Hubo un problema al intentar agregar el animal")
 
     def cancel(self):
-        """Cancela la operación"""
+        """
+        Cancela la operación
+        """
         self.reject()
 
     def edit(self):
-        """Edit an existent animal in the database"""
+        """
+        Modifica un animal que se encuentre en la base de datos
+        """
         id_animal = controller_form.get_id_animal(self.common)
         common = self.ui.common_name.toPlainText()
         if common == "":
@@ -144,7 +149,9 @@ class Form(QtGui.QDialog):
                                         u"Hubo un problema al intentar editar el animal, intentelo de nuevo")
 
     def open(self):
-        """abre ventana para buscar imagen en el directorio"""
+        """
+        Abre ventana para buscar imagen en el directorio
+        """
         dialog = QtGui.QFileDialog()
         imagen = dialog.getOpenFileName(self,"Abrir imagen" , "?" , "Image Files (*.png *.jpg *.bmp)")
         Ifile = QFileInfo(imagen[0])
@@ -158,7 +165,9 @@ class Form(QtGui.QDialog):
             self.ui.image.setPlainText(imagen[0])
 
     def delete(self):
-	"""borra la imagen del animal, cuando se preciona Quitar"""
+    	"""
+        Borra la imagen del animal, cuando se preciona Quitar
+        """
         path = self.ui.image.toPlainText()
         Ifile = QFileInfo(path)
         success = controller_form.del_image(Ifile.fileName())
@@ -167,4 +176,3 @@ class Form(QtGui.QDialog):
                                             u"Dirección incorrecta",
                                             QtGui.QMessageBox.Ok, QtGui.QMessageBox.Ok)
         self.ui.image.setPlainText("")
-
