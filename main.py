@@ -61,9 +61,9 @@ class MainWindow(QtGui.QMainWindow):
                     return False
 
     def create_folder(self):
-	   """
-       Crea carpeta de imagenes si no existe
-       """
+    	"""
+        Crea carpeta de imagenes si no existe
+        """
         self.directory = QDir.root()
         if not os.path.exists(self.directory.currentPath()+"/images"):
             os.makedirs(self.directory.currentPath()+"/images")
@@ -79,9 +79,9 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.searchBox.setEditable(False)
 
     def load_animals(self, animals=None):
-	   """
-       Carga los animales en pantalla
-       """
+        """
+        Carga los animales en pantalla
+        """
         if animals is None:
             animals = controller.get_animals()
         self.model = QtGui.QStandardItemModel(len(animals), 1)        
@@ -118,9 +118,9 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.tableView.setColumnWidth(1, 325)
 
     def load_products_by_search(self):
-	   """
-       Carga los animales despues de aplicar un filtro
-       """
+        """
+        Carga los animales despues de aplicar un filtro
+        """
         word = self.ui.search.text()
         animalslist = controller.get_animals_name()
         animals = controller.search_animal(word)
@@ -131,9 +131,9 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.search.setCompleter(completer)
 
     def load_animals_by_type(self):
-	   """
-       Carga los animales por tipo
-       """ 
+        """
+        Carga los animales por tipo
+        """ 
         id_tipo = self.ui.searchBox.itemData(self.ui.searchBox.currentIndex())
         if id_tipo == -1: 
             animals = controller.get_animals()
