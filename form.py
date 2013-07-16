@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'form.ui'
 #
-# Created: Sun Jul 14 03:53:39 2013
+# Created: Mon Jul 15 20:58:20 2013
 #      by: pyside-uic 0.2.13 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,9 +12,9 @@ from PySide import QtCore, QtGui
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(440, 490)
-        Form.setMinimumSize(QtCore.QSize(440, 490))
-        Form.setMaximumSize(QtCore.QSize(440, 490))
+        Form.resize(440, 470)
+        Form.setMinimumSize(QtCore.QSize(440, 470))
+        Form.setMaximumSize(QtCore.QSize(440, 480))
         self.label = QtGui.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(20, 10, 218, 15))
         self.label.setObjectName("label")
@@ -43,25 +43,27 @@ class Ui_Form(object):
         self.label_4.setGeometry(QtCore.QRect(20, 280, 152, 21))
         self.label_4.setObjectName("label_4")
         self.btn_open = QtGui.QPushButton(Form)
-        self.btn_open.setGeometry(QtCore.QRect(250, 300, 81, 27))
+        self.btn_open.setGeometry(QtCore.QRect(190, 360, 111, 27))
         self.btn_open.setObjectName("btn_open")
         self.btn_delete = QtGui.QPushButton(Form)
-        self.btn_delete.setGeometry(QtCore.QRect(340, 300, 81, 27))
+        self.btn_delete.setGeometry(QtCore.QRect(310, 360, 101, 27))
         self.btn_delete.setObjectName("btn_delete")
         self.scrollArea = QtGui.QScrollArea(Form)
-        self.scrollArea.setGeometry(QtCore.QRect(20, 330, 401, 111))
+        self.scrollArea.setGeometry(QtCore.QRect(20, 310, 105, 105))
+        self.scrollArea.setMinimumSize(QtCore.QSize(105, 105))
+        self.scrollArea.setMaximumSize(QtCore.QSize(105, 105))
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 399, 109))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 103, 103))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.btn_done = QtGui.QPushButton(Form)
-        self.btn_done.setGeometry(QtCore.QRect(230, 450, 88, 27))
+        self.btn_done.setGeometry(QtCore.QRect(230, 430, 88, 27))
         self.btn_done.setFocusPolicy(QtCore.Qt.TabFocus)
         self.btn_done.setObjectName("btn_done")
         self.btn_cancel = QtGui.QPushButton(Form)
-        self.btn_cancel.setGeometry(QtCore.QRect(330, 450, 88, 27))
+        self.btn_cancel.setGeometry(QtCore.QRect(330, 430, 88, 27))
         self.btn_cancel.setObjectName("btn_cancel")
         self.label_5 = QtGui.QLabel(Form)
         self.label_5.setGeometry(QtCore.QRect(20, 110, 218, 15))
@@ -70,9 +72,9 @@ class Ui_Form(object):
         self.typeBox.setGeometry(QtCore.QRect(20, 130, 401, 25))
         self.typeBox.setObjectName("typeBox")
         self.image = QtGui.QTextEdit(Form)
-        self.image.setGeometry(QtCore.QRect(20, 300, 220, 25))
-        self.image.setMinimumSize(QtCore.QSize(220, 25))
-        self.image.setMaximumSize(QtCore.QSize(220, 25))
+        self.image.setGeometry(QtCore.QRect(140, 330, 280, 25))
+        self.image.setMinimumSize(QtCore.QSize(280, 25))
+        self.image.setMaximumSize(QtCore.QSize(280, 25))
         self.image.setReadOnly(True)
         self.image.setObjectName("image")
 

@@ -8,7 +8,7 @@ import sys
 import view_form
 import os
 from PySide import QtGui, QtCore
-from PySide.QtCore import QDir
+from PySide.QtCore import QDir, QFileInfo
 from PySide.QtGui import *
 from mainwindow import Ui_MainWindow
 
@@ -23,8 +23,6 @@ class MainWindow(QtGui.QMainWindow):
         self.load_animals()
         self.load_types()
         self.create_folder()
-        self.scene = QGraphicsScene()
-        self.ui.graphicsView.setScene(self.scene)
 
     def about(self):
         message = u'Integrantes: \n- Nicolas Aravena\n- Sebastian Matamala\n- Arturo Reyes'
@@ -59,8 +57,8 @@ class MainWindow(QtGui.QMainWindow):
 
     def create_folder(self):
         self.directory = QDir.root()
-        if not os.path.exists(self.directory.currentPath()+"/Imagenes"):
-            os.makedirs(self.directory.currentPath()+"/Imagenes")
+        if not os.path.exists(self.directory.currentPath()+"/images"):
+            os.makedirs(self.directory.currentPath()+"/images")
 
     def load_types(self):
         #Carga los tipos de animales en el combobox
@@ -74,16 +72,37 @@ class MainWindow(QtGui.QMainWindow):
         if animals is None:
             animals = controller.get_animals()
         self.model = QtGui.QStandardItemModel(len(animals), 1)        
-        self.model.setHorizontalHeaderItem(0, QtGui.QStandardItem(u"Animal"))
-        self.model.setHorizontalHeaderItem(1, QtGui.QStandardItem(u"Imágenes"))
+        self.model.setHorizontalHeaderItem(0, QtGui.QStandardItem(u"Imagen"))
+        self.model.setHorizontalHeaderItem(1, QtGui.QStandardItem(u"Animal"))
         r = 0
+        self.display = QGraphicsView()
         for row in animals:
-            index = self.model.index(r, 0, QtCore.QModelIndex())
+            index = self.model.index(r, 1, QtCore.QModelIndex())
             self.model.setData(index, row['nombre_comun'])
-            r = r+1
+
+            index = self.model.index(r, 0, QtCore.QModelIndex())
+            id_animal = controller_form.get_id_animal(animals[r][1])
+            self.image = controller_form.get_image(id_animal)
+            if self.image:
+                self.path = QDir.currentPath() + "/images/" + self.image[0] + self.image[1]
+                Ifile = QFileInfo(self.path)
+                pixImage = controller_form.get_root_image(self.path)
+                item = QGraphicsPixmapItem(pixImage.scaled(25,25))
+                scene = QGraphicsScene()
+                scene.addItem(item)
+                self.display.setScene(scene)
+                self.model.setData(index, self.display.setScene(scene))
+            else:
+                noimage = controller_form.no_image()
+                item = QGraphicsPixmapItem(noimage.scaled(25,25))
+                scene = QGraphicsScene()
+                scene.addItem(item)
+                self.display.setScene(scene)
+                self.model.setData(index, self.display.setScene(scene))
+            r += 1
         self.ui.tableView.setModel(self.model)
-        self.ui.tableView.setColumnWidth(0, 150)
-        self.ui.tableView.setColumnWidth(1, 330)
+        self.ui.tableView.setColumnWidth(0, 105)
+        self.ui.tableView.setColumnWidth(1, 325)
 
     def load_products_by_search(self):
         word = self.ui.search.text()
@@ -129,7 +148,7 @@ class MainWindow(QtGui.QMainWindow):
                                     u"Debe seleccionar el animal que desea editar")
             return False
         else:
-            animal = model.index(index.row(), 0, QtCore.QModelIndex()).data()
+            animal = model.index(index.row(), 1, QtCore.QModelIndex()).data()
             form = view_form.Form(self, animal)
             form.rejected.connect(self.load_animals)
             form.exec_()
@@ -139,17 +158,29 @@ class MainWindow(QtGui.QMainWindow):
         #CARGA UNA IMAGEN SOBRE OTRA!!! REVISAR
         model = self.ui.tableView.model()
         index = self.ui.tableView.currentIndex()
-        data = model.index(index.row(), 0, QtCore.QModelIndex()).data()
+        data = model.index(index.row(),1,QtCore.QModelIndex()).data()
         animal = controller.get_animal(data)
         tipo = controller.get_type(data)
         id_animal = controller_form.get_id_animal(animal[1])
         pixImage = controller_form.get_image_pix(id_animal)
-        self.scene.addItem(pixImage)
         self.ui.common.setText(animal[1])
         self.ui.cientific.setText(animal[2])
         self.ui.type.setText(tipo[0])
         self.ui.data.setWordWrap(True)
         self.ui.data.setText(animal[3])
+        if pixImage:
+            item = QGraphicsPixmapItem(pixImage.scaled(375,285))
+            self.scene = QGraphicsScene()
+            self.ui.graphicsView.setSceneRect(0,0,375,285)
+            self.ui.graphicsView.setScene(self.scene)
+            self.scene.addItem(item)
+        else:
+            noimage = controller_form.no_image()
+            item = QGraphicsPixmapItem(noimage.scaled(375,285))
+            self.scene = QGraphicsScene()
+            self.ui.graphicsView.setSceneRect(0,0,375,285)
+            self.ui.graphicsView.setScene(self.scene)
+            self.scene.addItem(item)
 
 def run():
     app = QtGui.QApplication(sys.argv)
