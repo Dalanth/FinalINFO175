@@ -107,7 +107,6 @@ def edit_animal(id_animal,common,cientific,data,id_type):
     return success
 
 def del_image(path):
-	"""Elimina imagen de la base de datos"""
     success = False
     con = controller.connect()
     c = con.cursor()
@@ -131,7 +130,6 @@ def del_image(path):
         return success
 
 def no_image():
-	"""Se carga la imagen definida si no existe imagen asociada al animal"""
     path = QDir.currentPath() + "/images/noimage.jpg"
     pixMap = QPixmap(path)
     return pixMap
