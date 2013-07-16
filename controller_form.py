@@ -155,7 +155,8 @@ def no_image():
     return pixMap
 
 def search_image(id_animal, Ifile):
-    """Busca imagen de un animal
+    """
+    Busca imagen de un animal
     """
     success = False
     con = controller.connect()

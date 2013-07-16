@@ -3,12 +3,18 @@
 import sqlite3
 
 def connect():
+    """
+    Conecta la base de datos con el programa
+    """
     #Connect with the database
     con = sqlite3.connect("data.db")
     con.row_factory = sqlite3.Row
     return con
 
 def delete(animal):
+    """
+    Borra el animal seleccionado
+    """
     success = False
     con = connect()
     c = con.cursor()
@@ -24,6 +30,9 @@ def delete(animal):
     return success
 
 def get_animal(nombre_comun):
+    """
+    Obtiene un animal
+    """
     #Gets Data from the database for display
     con = connect()
     c = con.cursor()
@@ -34,6 +43,9 @@ def get_animal(nombre_comun):
     return animal
 
 def get_animals():
+    """
+    Obtiene todos los animales
+    """
     con = connect()
     c = con.cursor()
     query = """SELECT id_animal, nombre_comun FROM animal"""
@@ -43,6 +55,9 @@ def get_animals():
     return animals
 
 def get_animals_by_type(id_tipo):
+    """
+    Obtiene los animales por tipo
+    """
     con = connect()
     c = con.cursor()
     query = """SELECT a.id_animal, a.nombre_comun, b.nombre as 'tipos'
@@ -54,6 +69,9 @@ def get_animals_by_type(id_tipo):
     return animals
 
 def get_animals_name():
+    """
+    Obtiene los animales por nombre
+    """
     con = connect()
     c = con.cursor()
     query = """SELECT * FROM animal"""
@@ -68,6 +86,9 @@ def get_animals_name():
     return wordlist
 
 def search_animal(word):
+    """
+    Busca animales por palabra, incluye todos los parametros
+    """
     con = connect()
     c = con.cursor()
     query = """SELECT a.id_animal, a.nombre_comun, a.nombre_cientifico, a.datos, b.nombre as 'tipos'
@@ -81,6 +102,9 @@ def search_animal(word):
     return animals
 
 def get_type(nombre):
+    """
+    Obtiene un tipo de animal
+    """
     con = connect()
     c = con.cursor()
     query = """SELECT fk_id_tipo FROM animal WHERE nombre_comun=?"""
@@ -94,6 +118,9 @@ def get_type(nombre):
     return tipo
 
 def get_types():
+    """
+    Obtiene varios tipos de animales
+    """
     con = connect()
     c = con.cursor()
     query = """SELECT id_tipo, nombre FROM tipo"""
