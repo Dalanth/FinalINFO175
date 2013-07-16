@@ -16,6 +16,7 @@ class MainWindow(QtGui.QMainWindow):
 
 
     def __init__(self):
+
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -43,7 +44,7 @@ class MainWindow(QtGui.QMainWindow):
                                     QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
 
             if self.ui.confirmMessage == QtGui.QMessageBox.Yes:#Pide confirmacion
-                animal = model.index(index.row(), 0, QtCore.QModelIndex()).data()
+                animal = model.index(index.row(), 1, QtCore.QModelIndex()).data()
                 if (controller.delete(animal)):
                     self.load_animals()
                     self.ui.msgBox = QtGui.QMessageBox.information(self, u'Atención',
