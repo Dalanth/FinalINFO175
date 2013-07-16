@@ -39,7 +39,7 @@ class Form(QtGui.QDialog):
             id_animal = controller_form.get_id_animal(common_name)
             self.image = controller_form.get_image(id_animal)
             if self.image:
-		"""Muestra la imagen y la reduce"""
+				"""Muestra la imagen y la reduce"""
                 self.path = QDir.currentPath() + "/images/" + self.image[0] + self.image[1]
                 self.ui.image.setPlainText(self.path)
                 Ifile = QFileInfo(self.path)
