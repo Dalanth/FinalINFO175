@@ -29,7 +29,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.aboutUs = QtGui.QMessageBox.information(self, 'Acerca de Animales', message)
 
     def delete(self):
-    #Elimina un animal de la base de datos mediante el controlador
+    """Elimina un animal de la base de datos mediante el controlador"""
         model = self.ui.tableView.model()
         index = self.ui.tableView.currentIndex()
         if index.row() == -1: #No hay fila seleccionada
@@ -56,12 +56,13 @@ class MainWindow(QtGui.QMainWindow):
                     return False
 
     def create_folder(self):
+	"""Crea carpeta de imagenes si no existe"""
         self.directory = QDir.root()
         if not os.path.exists(self.directory.currentPath()+"/images"):
             os.makedirs(self.directory.currentPath()+"/images")
 
     def load_types(self):
-        #Carga los tipos de animales en el combobox
+        """Carga los tipos de animales en el combobox"""
         types = controller.get_types()
         self.ui.searchBox.addItem("Todos", -1)
         for type1 in types: #Agrega los tipos al combobox
@@ -69,6 +70,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.searchBox.setEditable(False)
 
     def load_animals(self, animals=None):
+	"""Carga los animales en pantalla"""
         if animals is None:
             animals = controller.get_animals()
         self.model = QtGui.QStandardItemModel(len(animals), 1)        
@@ -105,6 +107,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.tableView.setColumnWidth(1, 325)
 
     def load_products_by_search(self):
+	"""Carga los animales despues de aplicar un filtro"""
         word = self.ui.search.text()
         animalslist = controller.get_animals_name()
         animals = controller.search_animal(word)
@@ -115,6 +118,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.search.setCompleter(completer)
 
     def load_animals_by_type(self):
+	"""Carga los animales por tipo""" 
         id_tipo = self.ui.searchBox.itemData(self.ui.searchBox.currentIndex())
         if id_tipo == -1: #si la opcion seleccionada es "todos", muestra todos los animales
             animals = controller.get_animals()
@@ -123,7 +127,7 @@ class MainWindow(QtGui.QMainWindow):
         self.load_animals(animals)
 
     def set_listeners(self):
-    #Sets up button listeners
+    """Sets up button listeners"""
         self.ui.btn_delete.triggered.connect(self.delete)
         self.ui.add.triggered.connect(self.show_add_form)
         self.ui.edit.triggered.connect(self.show_edit_form)
@@ -134,13 +138,13 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.actionAcerca_de.triggered.connect(self.about)
 
     def show_add_form(self):
-    #Muestra la ventana de agregar animales
+    """Muestra la ventana de agregar animales"""
         form = view_form.Form(self)
         form.rejected.connect(self.load_animals)
         form.exec_()
 
     def show_edit_form(self):
-    #Muestra la ventana de editar productos
+    """Muestra la ventana de editar productos"""
         model = self.ui.tableView.model()
         index = self.ui.tableView.currentIndex()
         if index.row() == -1: ##No row selected
@@ -154,8 +158,8 @@ class MainWindow(QtGui.QMainWindow):
             form.exec_()
 
     def display_data(self):
-        #Modificado display para que muestre la imagen que se 
-        #CARGA UNA IMAGEN SOBRE OTRA!!! REVISAR
+        """Modificado display para que muestre la imagen que se"""
+        """CARGA UNA IMAGEN SOBRE OTRA!!!"""
         model = self.ui.tableView.model()
         index = self.ui.tableView.currentIndex()
         data = model.index(index.row(),1,QtCore.QModelIndex()).data()
