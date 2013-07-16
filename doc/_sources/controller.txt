@@ -1,0 +1,16 @@
+Controller
+===============================================
+
+Contenido:
+
+.. toctree::
+   :maxdepth: 2
+
+.. automodule:: controller
+   :members:
+   :undoc-members:
+
+
+
+* :ref:`genindex`
+* :ref:`search`

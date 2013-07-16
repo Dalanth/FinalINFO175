@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Controller_form &mdash; Tarea Final INFO175 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Tarea Final INFO175 0.9 documentation" href="index.html" />
+    <link rel="prev" title="Controller" href="controller.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="controller.html" title="Controller"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Tarea Final INFO175 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="controller-form">
+<h1>Controller_form<a class="headerlink" href="#controller-form" title="Permalink to this headline">¶</a></h1>
+<p>Contenido:</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<span class="target" id="module-controller_form"></span><dl class="function">
+<dt id="controller_form.add_animal">
+<tt class="descclassname">controller_form.</tt><tt class="descname">add_animal</tt><big>(</big><em>common</em>, <em>cientific</em>, <em>data</em>, <em>id_type</em><big>)</big><a class="headerlink" href="#controller_form.add_animal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Agrega un nuevo animal a la base de datos</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="controller_form.add_image_dir">
+<tt class="descclassname">controller_form.</tt><tt class="descname">add_image_dir</tt><big>(</big><em>animal</em>, <em>path</em><big>)</big><a class="headerlink" href="#controller_form.add_image_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Agrega la imagen a la base de datos</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="controller_form.del_image">
+<tt class="descclassname">controller_form.</tt><tt class="descname">del_image</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#controller_form.del_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Borra la imagen de un animal</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="controller_form.edit_animal">
+<tt class="descclassname">controller_form.</tt><tt class="descname">edit_animal</tt><big>(</big><em>id_animal</em>, <em>common</em>, <em>cientific</em>, <em>data</em>, <em>id_type</em><big>)</big><a class="headerlink" href="#controller_form.edit_animal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Actualiza el animal en la base de datos</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="controller_form.get_id_animal">
+<tt class="descclassname">controller_form.</tt><tt class="descname">get_id_animal</tt><big>(</big><em>animal</em><big>)</big><a class="headerlink" href="#controller_form.get_id_animal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtiene el id del animal</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="controller_form.get_id_type">
+<tt class="descclassname">controller_form.</tt><tt class="descname">get_id_type</tt><big>(</big><em>tipo</em><big>)</big><a class="headerlink" href="#controller_form.get_id_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtiene el id del tipo</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="controller_form.get_image">
+<tt class="descclassname">controller_form.</tt><tt class="descname">get_image</tt><big>(</big><em>id_animal</em><big>)</big><a class="headerlink" href="#controller_form.get_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtiene la imagen de un animal especifico</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="controller_form.get_image_pix">
+<tt class="descclassname">controller_form.</tt><tt class="descname">get_image_pix</tt><big>(</big><em>id_animal</em><big>)</big><a class="headerlink" href="#controller_form.get_image_pix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Carga la imagen ya almacenada en la base de datos</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="controller_form.get_root_image">
+<tt class="descclassname">controller_form.</tt><tt class="descname">get_root_image</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#controller_form.get_root_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Carga la imagen desde la ruta solicitada sin almacenarla en la base de datos</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="controller_form.no_image">
+<tt class="descclassname">controller_form.</tt><tt class="descname">no_image</tt><big>(</big><big>)</big><a class="headerlink" href="#controller_form.no_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Si no existe imagen carga una por defecto</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="controller_form.search_image">
+<tt class="descclassname">controller_form.</tt><tt class="descname">search_image</tt><big>(</big><em>id_animal</em>, <em>Ifile</em><big>)</big><a class="headerlink" href="#controller_form.search_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Busca imagen de un animal</p>
+</dd></dl>
+
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="controller.html"
+                        title="previous chapter">Controller</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/controller_form.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="controller.html" title="Controller"
+             >previous</a> |</li>
+        <li><a href="index.html">Tarea Final INFO175 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Nicolas Aravena, Sebastian Matamala, Arturo Reyes.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -93,6 +93,9 @@ def get_root_image(path):
     return pixMap
 
 def get_image(id_animal):
+    """
+    Obtiene la imagen de un animal especifico
+    """
     con = controller.connect()
     c = con.cursor()
     query = """SELECT ubicacion, formato FROM imagen WHERE fk_id_animal=?"""
@@ -102,7 +105,7 @@ def get_image(id_animal):
 
 def edit_animal(id_animal,common,cientific,data,id_type):
     """
-    Add a new product to the table 'product' on the database
+    Actualiza el animal en la base de datos
     """
     success = False
     con = controller.connect()

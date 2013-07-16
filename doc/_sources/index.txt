@@ -1,0 +1,36 @@
+.. Tarea_Final_INFO175 documentation master file, created by
+   sphinx-quickstart on Mon Jul 15 23:18:01 2013.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Documentación Tarea_Final_INFO175
+===============================================
+
+Esta aplicación muestra una lista de animales, cada una con sus respectivos datos e imagen.
+
+Se requiere de:
+	- Linux Mint/Ubuntu
+	- Python 2.7 (viene en el sistema operativo
+	- PySide:
+		- Pasos para instalación:
+			#. #sudo add-apt-repository ppa:pyside
+			#. #sudo apt-get update
+			#. #sudo apt-get install python-pyside
+			#. #sudo apt-get install pyside-tolls
+
+Contenido:
+
+.. toctree::
+   :maxdepth: 2
+
+   main.rst
+   view_form.rst
+   controller.rst
+   controller_form.rst
+
+
+Indices y tablas
+==================
+
+* :ref:`genindex`
+* :ref:`search`

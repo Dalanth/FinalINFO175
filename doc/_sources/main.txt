@@ -1,0 +1,16 @@
+Main
+===============================================
+
+Contenido:
+
+.. toctree::
+   :maxdepth: 2
+
+.. automodule:: main
+   :members:
+   :undoc-members:
+
+
+
+* :ref:`genindex`
+* :ref:`search`
