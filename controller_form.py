@@ -5,7 +5,7 @@ from PySide.QtCore import QDir, QFileInfo
 from PySide.QtGui import QGraphicsPixmapItem, QPixmap, QImage
 
 def add_animal(common,cientific,data,id_type):
-    #Add a new product to the table 'product' on the database
+    """Add a new product to the table 'product' on the database"""
     success = False
     con = controller.connect()
     c = con.cursor()
@@ -22,7 +22,7 @@ def add_animal(common,cientific,data,id_type):
     return success
 
 def get_id_type(tipo):
-    #Obtiene el id del tipo
+    """Obtiene el id del tipo"""
     con = controller.connect()
     c = con.cursor()
     query = """SELECT id_tipo FROM tipo WHERE nombre=?"""
@@ -33,7 +33,7 @@ def get_id_type(tipo):
     return result
 
 def get_id_animal(animal):
-    #Obtiene el id del animal
+    """Obtiene el id del animal"""
     con = controller.connect()
     c = con.cursor()
     query = """SELECT id_animal FROM animal WHERE nombre_comun=?"""
@@ -44,7 +44,7 @@ def get_id_animal(animal):
     return result
 
 def add_image_dir(animal,path):
-    #Agrega la imagen a la base de datos
+    """Agrega la imagen a la base de datos"""
     con = controller.connect()
     c = con.cursor()
     pos = 0
@@ -56,14 +56,13 @@ def add_image_dir(animal,path):
     while pos <= len(path)-1:
         format = format + path[pos]
         pos += 1
-    #print (name+format)
     query = """INSERT INTO imagen (ubicacion,formato,fk_id_animal) VALUES(?,?,?)"""
     c.execute(query,[name,format,animal])
     con.commit()
     con.close
 
 def get_image_pix(id_animal):
-    #Carga la imagen ya almacenada en la base de datos
+    """Carga la imagen ya almacenada en la base de datos"""
     con = controller.connect()
     c = con.cursor()
     query = """SELECT ubicacion, formato FROM imagen WHERE fk_id_animal=?"""
@@ -77,7 +76,7 @@ def get_image_pix(id_animal):
         return pixMap
 
 def get_root_image(path):
-    #Carga la imagen desde la ruta solicitada sin almacenarla en la base de datos
+    """Carga la imagen desde la ruta solicitada sin almacenarla en la base de datos"""
     pixMap = QPixmap(path)
     return pixMap
 
@@ -90,7 +89,7 @@ def get_image(id_animal):
     return image
 
 def edit_animal(id_animal,common,cientific,data,id_type):
-    #Add a new product to the table 'product' on the database
+    """Add a new product to the table 'product' on the database"""
     success = False
     con = controller.connect()
     c = con.cursor()
@@ -108,6 +107,7 @@ def edit_animal(id_animal,common,cientific,data,id_type):
     return success
 
 def del_image(path):
+	"""Elimina imagen de la base de datos"""
     success = False
     con = controller.connect()
     c = con.cursor()
@@ -117,13 +117,11 @@ def del_image(path):
         while path[pos] != ".":
             name = name + path[pos]
             pos += 1
-        #print name
         query = """DELETE FROM imagen WHERE ubicacion=?"""
         try:
             c.execute(query,[name])
             con.commit()
             success = True
-            #QDir.rmpath(path)
         except sqlite3.Error as e:
             success = False
             print "Error:", e.args[0]
@@ -133,6 +131,7 @@ def del_image(path):
         return success
 
 def no_image():
+	"""Se carga la imagen definida si no existe imagen asociada al animal"""
     path = QDir.currentPath() + "/images/noimage.jpg"
     pixMap = QPixmap(path)
     return pixMap

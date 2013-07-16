@@ -1,0 +1,28 @@
+Desarrolladores:
+	Nicolás Aravena
+	Sebastian Matamala
+	Arturo Reyes
+
+Requerimientos:
+	-Sistema operativo: Linux Ubuntu/Mint
+	-Python 2.7
+	-PySide:
+		para instalar PySide ingresar estos comandos en la terminal,
+		#sudo add-apt-repository ppa:pyside
+		#sudo apt-get update
+		#sudo apt-get install python-pyside
+		#sudo apt-get install pyside-tools
+
+Descripción:
+	Esta aplicación muestra una lista de animales, cada animal tiene asignado su nombre, nombre cientifico, descripción, tipo e imagenes.
+	Además permite agregar, editar y eliminar animales.
+
+	Contiene un buscador que permite filtrar la lista mostrando solo los productos que contengan la información deseada, también un combo box que muestra los tipos de animales.
+
+
+Ejecutar:
+	-Desde la terminal situarse en la carpeta y ejecutar con python el archivo 'main.py'.
+	-Luego de ejecutar el comando debe aparecer en pantalla una ventana con el buscador, una lista de animales,  datos de cada animal y una imagen de cada uno de ellos.
+	-En la pestaña archivos se encuentran las opciones de "Agregar", "Editar", "Eliminar", "Salir".
+	-en la pestaña ayuda se encuentra el "Leeme" y "Acerca de".
+
